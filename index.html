@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>回声 Echo · 无障碍数字生活助手</title>
+<style>
+:root{color-scheme:light;--bg:#f5f7f4;--card:#fff;--line:#dce7e0;--ink:#142d27;--muted:#4d635b;--green:#08654f;--on:#fff;--mint:#e1f2e7;--red:#9e3c44;--rose:#fae8e7;--shadow:0 14px 42px #173d2b0a;--scale:1;font-size:calc(16px * var(--scale));font-family:"Microsoft YaHei UI","PingFang SC","Noto Sans CJK SC",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55}a{color:inherit}button,input,select,textarea{font:inherit}button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,h1:focus-visible{outline:3px solid #b16000;outline-offset:4px}button[disabled]{cursor:not-allowed;opacity:.55}h1,h2,h3,p{margin:0}small{font-size:.82rem}svg{display:block}.ico{width:22px;height:22px;flex:none}.skip{position:fixed;z-index:9;left:12px;top:8px;transform:translateY(-150%);padding:12px;background:var(--card)}.skip:focus{transform:none}.shell{min-height:100vh;display:grid;grid-template-columns:232px minmax(0,1fr)}
+.sidebar{height:100vh;position:sticky;top:0;display:flex;flex-direction:column;padding:27px 17px 19px;background:var(--card);border-right:1px solid var(--line);overflow:auto}.brand{display:flex;gap:12px;align-items:center;text-decoration:none;padding:0 9px;margin-bottom:36px;min-height:48px}.brandmark{width:44px;height:44px;display:grid;place-items:center;background:var(--green);color:var(--on);border-radius:14px;flex:none}.brandmark .ico{width:25px;height:25px}.brandname{display:block;font-size:1.22rem;font-weight:800;line-height:1.25;letter-spacing:.09em}.brandsub{color:var(--muted);font-size:.72rem;letter-spacing:.025em}.navlabel{padding:0 11px;margin:0 0 8px;color:var(--muted);font-size:.73rem;letter-spacing:.13em}.navitem{display:flex;gap:11px;align-items:center;min-height:45px;border-radius:10px;padding:7px 10px;text-decoration:none;color:var(--muted);font-size:.88rem;font-weight:700}.navitem:hover,.back:hover{background:var(--bg);color:var(--ink)}.navitem.active{background:var(--mint);color:var(--green)}.navitem .ico{width:19px;height:19px}.navlist{display:grid;gap:4px}.navlist+.navlist{margin-top:15px;padding-top:13px;border-top:1px solid var(--line)}.sidefoot{margin-top:auto;padding:25px 10px 0;color:var(--muted);font-size:.72rem;display:flex;gap:8px;align-items:center}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:13px;min-height:73px;padding:12px clamp(20px,4vw,55px);border-bottom:1px solid var(--line);background:var(--card)}.crumb{display:flex;align-items:center;flex-wrap:wrap;gap:5px 9px;font-size:.82rem;color:var(--muted)}.crumb a,.crumb strong,.crumb [aria-current]{display:inline-flex;align-items:center;min-height:44px}.crumb a{text-decoration:none}.crumb a:hover{text-decoration:underline}.crumb strong,.crumb [aria-current]{color:var(--ink);font-weight:800}.toptools{display:flex;gap:8px;flex-wrap:wrap}.toptools .ico{width:18px;height:18px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 15px;min-height:44px;border-radius:10px;text-decoration:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:700;font-size:.86rem;text-align:center;max-width:100%}.btn:hover{border-color:var(--green);color:var(--green)}.btn[aria-pressed=true],.btn.soft{background:var(--mint);color:var(--green)}.btn.primary{border-color:var(--green);background:var(--green);color:var(--on)}.btn.danger{border-color:var(--red);background:var(--red);color:#fff}.btn .ico{width:18px;height:18px}.wrap{max-width:1240px;margin:auto;padding:28px clamp(20px,4vw,55px) 28px}.flowtag{display:inline-flex;align-items:center;gap:8px;color:var(--green);background:var(--mint);border-radius:99px;padding:5px 11px;font-size:.75rem;font-weight:800;letter-spacing:.045em}.flowtag .dot{width:6px;height:6px}
+.hero{isolation:isolate;position:relative;overflow:hidden;border:1px solid #d6e7dc;border-radius:23px;background:#e3f1e7;min-height:283px;display:flex;align-items:center;color:#153a2e}.herotext{position:relative;z-index:1;padding:28px 34px;width:min(100%,620px)}.hero .flowtag{background:#f5fbf6;color:#08654f}.hero h1{font-size:clamp(1.75rem,3.4vw,3rem);letter-spacing:-.055em;line-height:1.23;margin:12px 0 10px;font-weight:850}.hero p{font-size:.94rem;color:#39594d;max-width:600px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:19px}.heroart{position:absolute;right:0;top:0;width:47%;height:100%;z-index:0;pointer-events:none}.heroart svg{width:100%;height:100%}.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:25px 0 13px}.sectionhead h2{font-size:1.31rem;letter-spacing:-.035em}.sectionhead p{color:var(--muted);font-size:.85rem;margin-top:2px}.count{font-size:.76rem;white-space:nowrap;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.tile,.rowlink,.panel,.pagehero{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.tile{display:block;padding:16px;text-decoration:none;min-height:137px}.tile:hover,.rowlink:hover{border-color:var(--green);box-shadow:0 7px 16px #164a2b12}.tiletop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.glyph{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--mint);color:var(--green);flex:none}.glyph[data-tone=blue]{background:#e5effa;color:#315b85}.glyph[data-tone=violet]{background:#eee9fa;color:#654a89}.glyph[data-tone=red]{background:var(--rose);color:var(--red)}.glyph[data-tone=gold]{background:#f9efdb;color:#795617}.glyph[data-tone=teal]{background:#e3f2ef;color:#1b685d}.arrow{color:var(--green);align-self:center;margin-left:auto}.arrow .ico{width:20px;height:20px}.tile h3,.rowlink h3{font-size:1rem}.tile p,.rowlink p{font-size:.84rem;color:var(--muted);margin-top:3px}.foot{border-top:1px solid var(--line);margin-top:23px;padding-top:13px;display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;color:var(--muted);font-size:.76rem}.footnav{display:flex;gap:12px;flex-wrap:wrap}.footnav a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none}.footnav a:hover{text-decoration:underline}.foot>span{display:inline-flex;align-items:center;min-height:44px}
+.back{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:5px 9px;margin:0 0 10px -9px;text-decoration:none;border-radius:9px;color:var(--green);font-size:.85rem;font-weight:700}.back .ico{width:17px;height:17px}.pagehero{padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(110deg,var(--card) 46%,var(--mint))}.pagehero h1{font-size:clamp(1.7rem,3.3vw,2.43rem);line-height:1.25;letter-spacing:-.045em;margin:8px 0 5px}.pagehero p{color:var(--muted);font-size:.92rem}.pagehero>.glyph{width:72px;height:72px;border-radius:22px;transform:rotate(-5deg)}.pagehero>.glyph .ico{width:35px;height:35px}.pagegrid{display:grid;grid-template-columns:minmax(0,2.25fr) minmax(205px,1fr);gap:16px;margin-top:17px;align-items:start}.panel{padding:20px}.panel h2{font-size:1.12rem;margin-bottom:8px}.panel h3{font-size:.97rem}.panel p,.panel li{color:var(--muted);font-size:.88rem}.panel p+p{margin-top:8px}.panel ol,.panel ul{margin:10px 0 0;padding-left:24px}.panel li+li{margin-top:7px}.asidehead{display:flex;align-items:center;gap:8px;margin-bottom:8px}.asidehead .ico{color:var(--green);width:19px;height:19px}.asidehead h2{margin:0}.stack{display:grid;gap:10px}.rowlink{display:flex;align-items:center;gap:12px;padding:12px;text-decoration:none;min-height:75px;box-shadow:none}.rowlink .glyph{width:42px;height:42px}.panel+ .panel{margin-top:12px}.notice{padding:12px 13px;border-radius:11px;background:var(--mint);color:var(--ink);font-size:.85rem;margin-top:13px}.status:not(:empty){padding:12px;border:1px solid var(--line);border-radius:10px;margin-top:13px;color:var(--green);font-weight:700}.output:not(:empty){margin-top:13px;padding:15px;border:1px solid var(--line);border-radius:11px;background:var(--bg);white-space:pre-wrap;overflow-wrap:anywhere;min-height:70px}.captionbox{font-size:1.16rem;line-height:1.7;min-height:100px!important}.field{display:grid;gap:5px;margin-top:12px;font-size:.86rem;font-weight:700}input:not([type=checkbox]):not([type=range]),select,textarea{padding:8px 10px;width:100%;border:1px solid #82998e;border-radius:8px;background:var(--card);color:var(--ink);min-height:44px}textarea{resize:vertical}input[type=range]{min-height:44px;width:100%;accent-color:var(--green)}fieldset{margin:12px 0 0;border:1px solid var(--line);border-radius:9px;padding:6px 10px 8px}.check{display:flex;align-items:center;gap:10px;min-height:44px;font-size:.88rem}.check input{width:19px;height:19px;accent-color:var(--green);flex:none}.route-list{list-style:none;padding-left:0!important}.route-list li{padding:9px;border-radius:8px}.route-list li[aria-current=step]{background:var(--mint);color:var(--ink);font-weight:700}.mobilebrand{display:none}.widebox{margin-top:17px}.choice{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}.helptext{margin-top:10px}.dangertext{color:var(--red)!important}.fauxmap{position:relative;margin-top:13px;height:122px;border-radius:11px;background:repeating-linear-gradient(90deg,transparent 0 46px,var(--line) 47px 48px),repeating-linear-gradient(0deg,var(--bg) 0 30px,var(--line) 31px 32px);display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;text-align:center}.fauxmap span{font-size:.74rem;font-weight:700;background:var(--card);padding:4px 8px;border-radius:8px;border:1px solid var(--line)}.mapline{width:clamp(25px,14vw,135px);height:0;border-top:4px dashed var(--green)}
+html.contrast{color-scheme:dark;--bg:#101412;--card:#171c19;--line:#79897e;--ink:#fff;--muted:#e2eee6;--green:#aaf8ce;--on:#10241a;--mint:#264637;--red:#ad404a;--rose:#54292e;--shadow:none}.contrast .hero{background:#1b3729;border-color:var(--line);color:var(--ink)}.contrast .hero p{color:var(--muted)}.contrast .hero .flowtag{background:var(--mint);color:var(--green)}.contrast .heroart{opacity:.28}.contrast .glyph[data-tone]{background:var(--mint);color:var(--green)}.contrast button:focus-visible,.contrast a:focus-visible,.contrast input:focus-visible,.contrast select:focus-visible,.contrast textarea:focus-visible,.contrast h1:focus-visible{outline-color:#ffdb73}
+@media(max-width:1050px){.shell{grid-template-columns:190px minmax(0,1fr)}.heroart{opacity:.64;width:40%}.herotext{padding:25px}.wrap,.topbar{padding-left:24px;padding-right:24px}}
+@media(max-width:780px){.shell{display:block}.sidebar{display:none}.mobilebrand{display:inline-flex;color:var(--green);align-items:center;gap:6px;font-weight:800;text-decoration:none;margin-right:5px;min-height:44px}.mobilebrand .ico{width:18px;height:18px}.topbar{padding:8px 15px;flex-wrap:wrap}.wrap{padding:17px 15px}.hero{min-height:222px}.heroart{opacity:.3;width:50%}.herotext{padding:23px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pagegrid{grid-template-columns:1fr}.pagehero{padding:18px}.pagehero>.glyph{width:48px;height:48px;border-radius:13px}.pagehero>.glyph .ico{width:25px;height:25px}}
+@media(max-width:410px){.grid{grid-template-columns:1fr}.tile{min-height:auto}.toptools .btn{padding:8px 10px}.heroart{width:70%}.count{display:none}.panel{padding:15px}}
+@media(min-width:781px){.crumb .mobilebrand{display:none}}
+@media(prefers-reduced-motion:no-preference){.tile,.btn,.rowlink{transition:background .14s ease,border-color .14s ease,box-shadow .14s ease}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要内容</a>
+<div class="shell">
+<aside class="sidebar"><a class="brand" href="#/"><span class="brandmark" id="brandmark"></span><span><span class="brandname">回声 Echo</span><span class="brandsub">无障碍数字生活助手</span></span></a><nav id="side-nav" aria-label="主要导航"></nav><div class="sidefoot"><span class="dot"></span>产品演示 · 无需登录</div></aside>
+<div class="workspace">
+<header class="topbar"><nav id="crumb" class="crumb" aria-label="当前位置"></nav><div class="toptools"><button type="button" class="btn" id="big" aria-pressed="false">大字</button><button type="button" class="btn" id="contrast" aria-pressed="false">高对比</button><a class="btn soft" id="access-link" href="#/access">无障碍设置</a></div></header>
+<main id="main" class="wrap" tabindex="-1"></main>
+</div>
+</div>
+<script>
+'use strict';
+const shapes={
+ wave:'<path d="M3 12h2l2.5-6 3.5 12 3.5-12 3.5 12 2-6h2"/>',
+ home:'<path d="m3 10 9-7 9 7v10h-6v-6H9v6H3z"/>',
+ scan:'<path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3M7 9h10M7 13h10M7 17h5"/>',
+ captions:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 10h4m2 0h4M7 14h2m2 0h6"/>',
+ route:'<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h8a3 3 0 0 0 0-6H8a3 3 0 0 1 0-6h8"/>',
+ shield:'<path d="M12 22s7-3 7-9V5l-7-3-7 3v8c0 6 7 9 7 9Z"/><path d="M12 8v4m0 4h.01"/>',
+ bag:'<rect x="4" y="7" width="16" height="14" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2M4 12h16"/>',
+ users:'<circle cx="9" cy="8" r="3"/><path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2m1-15a3 3 0 0 1 0 6m1 3a4 4 0 0 1 4 4v2"/>',
+ sliders:'<path d="M4 7h4m4 0h8M4 17h10m4 0h2"/><circle cx="10" cy="7" r="2"/><circle cx="16" cy="17" r="2"/>',
+ arrow:'<path d="M4 12h15m-6-6 6 6-6 6"/>',back:'<path d="M20 12H5m6-6-6 6 6 6"/>',
+ next:'<path d="m9 6 6 6-6 6"/>', play:'<path d="m8 5 12 7-12 7z"/>',
+ info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/>',
+ type:'<path d="M3 18 8 6l5 12M5 14h6m9 4v-5a3 3 0 1 0 0 3"/>',
+ contrast:'<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor" stroke="none"/>',
+ mic:'<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0m-7 7v3"/>',
+ pin:'<path d="M20 10c0 5-8 11-8 11s-8-6-8-11a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2"/>',
+ heart:'<path d="M20 5c-3-3-7-1-8 1-1-2-5-4-8-1-4 4 0 9 8 15 8-6 12-11 8-15Z"/>',
+ chat:'<path d="M21 11a8 8 0 0 1-8 8H7l-4 2V11a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8Z"/><path d="M8 11h8"/>',
+ camera:'<rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3"/><path d="m8 6 1-3h6l1 3"/>'
+};
+const icon=name=>'<svg aria-hidden="true" class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+shapes[name]+'</svg>';
+const glyph=(name,tone='green')=>'<span class="glyph" data-tone="'+tone+'">'+icon(name)+'</span>';
+const modules={
+ read:{title:'读屏与识字',icon:'scan',tone:'green',desc:'识别照片上的字，也可以听文字朗读。',tip:'相册和拍照在正式产品中接入；这里用一张内置样例演示识别。文字朗读使用设备自带语音。',tasks:{ocr:['照片识字','用内置样例查看识别结果，再按需朗读。','camera'],speak:['文字朗读','输入一段内容，调整语速并播放。','wave']}},
+ caption:{title:'实时字幕',icon:'captions',tone:'blue',desc:'让面对面的对话、会议与视频内容变成文字。',tip:'原型使用预置台词展示字幕变化，不会开启麦克风或读取通话。',tasks:{talk:['面对面对话','开始一段问路对话，查看字幕逐条出现。','chat'],meeting:['会议字幕','体验会议内容转成可读字幕。','mic']}},
+ travel:{title:'无障碍出行',icon:'route',tone:'violet',desc:'按坡道、电梯等需求查看无障碍路线。',tip:'路线与设施均为演示数据，不代表真实路况，不能用于实际出行。',tasks:{plan:['规划无障碍路线','选择目的地及无障碍设施偏好。','pin'],guide:['分段导航','查看演示路线，逐步切换行程指引。','route']}},
+ help:{title:'紧急求助',icon:'shield',tone:'red',desc:'查看向家人发送位置与求助信息的流程。',tip:'本原型不读取真实位置、不拨打电话，也不会联系任何人。',tasks:{sos:['一键求助','核对模拟求助内容，体验确认流程。','shield'],contact:['求助联系人','编辑演示联系人与静默求助设置。','users']}},
+ life:{title:'生活服务',icon:'bag',tone:'gold',desc:'从大字入口体验挂号、叫车、办事和购物。',tip:'服务选择仅用于展示交互，不联网、不下单、不付款。',tasks:{doctor:['预约挂号','选择科室与时段，生成模拟预约。','heart'],cab:['无障碍叫车','选择目的地和乘车需求，预览模拟订单。','pin'],office:['政务办事','查看无障碍主题的示例办事清单。','bag'],shop:['日常购物','选择一件日常用品加入演示清单。','bag']}},
+ community:{title:'无障碍社区',icon:'users',tone:'teal',desc:'交流设施体验，了解志愿者协助方式。',tip:'社区内容是预置样例，反馈和协助申请不会上传。',tasks:{review:['设施评价','查看示例评价，并体验填写设施反馈。','chat'],volunteer:['志愿者协助','选择希望获得的陪同服务。','heart']}},
+ access:{title:'无障碍设置',icon:'sliders',tone:'green',desc:'按你的阅读、交流和操作习惯调整界面。',tip:'大字、高对比和模式偏好保存在当前浏览器；系统读屏请在设备设置中开启。',tasks:{mode:['选择体验模式','选择视障、听障或老年模式，也可恢复默认。','sliders']}}
+};
+const navIds=['read','caption','travel','help','life','community'];
+const readSample='回声社区服务中心\n开放时间：周一至周五，上午 9:00 到下午 5:00。\n正门右侧设有无障碍坡道。进入大厅后，请沿导向标识前往一楼服务台。';
+const routePlaces=['市民服务中心（示例）','社区卫生服务站（示例）','图书馆（示例）'];
+const routeSteps=['从社区东门出发，沿平坦人行道直行。','在路口走坡道至街对面，按信号提示通行。','到达目的地入口。若需上楼，请使用大厅内电梯。'];
+const scripts={talk:['你好，请问无障碍入口在哪里？','沿着右手边的走廊走，看到服务台后左转。','那边有坡道吗？','有，入口旁还有低位呼叫按钮。'],meeting:['大家好，我们开始今天的无障碍体验讨论。','本次先体验读屏和字幕，再试用出行工具。','请把遇到的问题记下来，最后一起反馈。','谢谢大家，今天的讨论到这里。']};
+const formLabel=(title,control)=>'<label class="field">'+title+control+'</label>';
+const options=values=>values.map(value=>'<option>'+value+'</option>').join('');
+const button=(id,label,type='',symbol='')=>'<button type="button" id="'+id+'" class="btn '+type+'">'+(symbol?icon(symbol):'')+label+'</button>';
+const link=(href,label,type='',symbol='')=>'<a href="#/'+href+'" class="btn '+type+'">'+(symbol?icon(symbol):'')+label+'</a>';
+const state={big:false,contrast:false,mode:'默认模式',route:routePlaces[0],preferences:['坡道'],contact:'家人（示例）',silent:false};
+try{const stored=JSON.parse(localStorage.getItem('echo-prototype-v1')||'{}');for(const key of ['big','contrast','mode']) if(typeof stored[key]===typeof state[key]) state[key]=stored[key];}catch{}
+const find=id=>document.getElementById(id);
+const setText=(id,value)=>{find(id).textContent=value;};
+let timer=null;
+let currentPath=null;
+let routeIndex=0;
+let captionIndex=0;
+let captionLines=[];
+function saveSettings(){try{localStorage.setItem('echo-prototype-v1',JSON.stringify({big:state.big,contrast:state.contrast,mode:state.mode}));}catch{}}
+function applySettings(){document.documentElement.style.setProperty('--scale',state.big?'1.20':'1');document.documentElement.classList.toggle('contrast',state.contrast);find('big').setAttribute('aria-pressed',String(state.big));find('contrast').setAttribute('aria-pressed',String(state.contrast));}
+find('brandmark').innerHTML=icon('wave');
+find('big').innerHTML=icon('type')+'大字';
+find('contrast').innerHTML=icon('contrast')+'高对比';
+find('access-link').innerHTML=icon('sliders')+'无障碍设置';
+find('big').onclick=()=>{state.big=!state.big;applySettings();saveSettings();};
+find('contrast').onclick=()=>{state.contrast=!state.contrast;applySettings();saveSettings();};
+document.querySelector('.skip').onclick=event=>{event.preventDefault();find('main').focus();};
+function navItem(key,title,symbol,selected,exact){
+ return '<a class="navitem'+(selected?' active':'')+'" href="#/'+key+'"'+(selected?' aria-current="'+(exact?'page':'location')+'"':'')+'>'+icon(symbol)+title+'</a>';
+}
+function drawNav(key,task){
+ find('side-nav').innerHTML='<div class="navlabel">工作台</div><div class="navlist">'+navItem('','首页','home',!key,true)+navIds.map(id=>navItem(id,modules[id].title,modules[id].icon,id===key,!task)).join('')+'</div><div class="navlist">'+navItem('access',modules.access.title,'sliders',key==='access',!task)+'</div>';
+ const mobile='<a class="mobilebrand" href="#/" aria-label="回声，回到首页">'+icon('wave')+'回声</a>';
+ const sep='<span aria-hidden="true">›</span>';
+ find('crumb').innerHTML=mobile+(key?'<a href="#/">首页</a>'+sep+(task?'<a href="#/'+key+'">'+modules[key].title+'</a>'+sep+'<strong aria-current="page">'+modules[key].tasks[task][0]+'</strong>':'<strong aria-current="page">'+modules[key].title+'</strong>'):'<strong aria-current="page">首页</strong>');
+}
+const footer='<footer class="foot"><span>回声 Echo · 交互原型 · 所有演示操作均不对外提交</span><nav class="footnav" aria-label="快捷链接"><a href="#/">首页</a><a href="#/access">无障碍设置</a></nav></footer>';
+const art='<div class="heroart" aria-hidden="true"><svg viewBox="0 0 510 280" preserveAspectRatio="xMaxYMid slice"><defs><linearGradient id="light" x2="1" y2="1"><stop stop-color="#f3fcf5"/><stop offset="1" stop-color="#c5e5d3"/></linearGradient></defs><circle cx="344" cy="142" r="160" fill="#d6ecdf"/><circle cx="344" cy="142" r="140" fill="none" stroke="#bddfcd"/><circle cx="344" cy="142" r="120" fill="none" stroke="#a9d7c2"/><circle cx="344" cy="142" r="92" fill="url(#light)" stroke="#b4dcca"/><circle cx="344" cy="142" r="66" fill="#f1f9f3" stroke="#a8d3bc"/><circle cx="344" cy="142" r="39" fill="#216d56"/><path d="M319 143h9l5-12 7 24 7-27 6 20 5-5h11" stroke="#e7f8ec" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M177 218C219 169 283 77 415 65c31-3 67 2 100 17" fill="none" stroke="#74aa94" stroke-width="1.6" stroke-dasharray="3 7"/><path d="M214 60c35 13 49 32 46 51M408 224c30-14 58-5 86 19" fill="none" stroke="#9acbb4"/><circle cx="228" cy="159" r="7" fill="#83bba4"/><circle cx="441" cy="67" r="7" fill="#38816a"/><circle cx="417" cy="220" r="5" fill="#38816a"/><circle cx="283" cy="254" r="4" fill="#85bda3"/><g transform="translate(216 89) rotate(-12)"><rect width="47" height="47" rx="13" fill="#f7fcf8" stroke="#b3d8c5"/><path d="M13 16h21M13 23h15M13 30h10" stroke="#468873" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(432 153) rotate(10)"><rect width="50" height="50" rx="14" fill="#f7fcf8" stroke="#b3d8c5"/><path d="M25 12a8 8 0 0 0-8 8c0 6 8 13 8 13s8-7 8-13a8 8 0 0 0-8-8Z" stroke="#468873" stroke-width="1.8" fill="none"/><circle cx="25" cy="20" r="2.5" fill="#468873"/></g></svg></div>';
+function homepage(){
+ const tiles=navIds.map(id=>{const item=modules[id];return '<a href="#/'+id+'" class="tile"><div class="tiletop">'+glyph(item.icon,item.tone)+'<span class="arrow">'+icon('arrow')+'</span></div><h3>'+item.title+'</h3><p>'+item.desc+'</p></a>';}).join('');
+ return '<section class="hero">'+art+'<div class="herotext"><span class="flowtag"><span class="dot"></span>一级页面 · 首页</span><h1 id="pagetitle" tabindex="-1">信息读得见，生活办得成</h1><p>为视障、听障与老年用户设计。识字、读字幕、找路线，一处就能开始。</p><div class="actions">'+link('read','体验读屏与识字','primary','scan')+link('caption','打开实时字幕','','captions')+'</div></div></section><section aria-labelledby="features"><div class="sectionhead"><div><h2 id="features">我想做什么？</h2><p>选择一个入口，即可进入对应的工具。</p></div><span class="count">06 项核心功能</span></div><div class="grid">'+tiles+'</div></section>';
+}
+function pageHeader(key,task){
+ const item=modules[key];const title=task?item.tasks[task][0]:item.title;const desc=task?item.tasks[task][1]:item.desc;
+ return '<a class="back" href="#/'+(task?key:'')+'">'+icon('back')+(task?'返回'+item.title:'返回首页')+'</a><section class="pagehero"><div><span class="flowtag"><span class="dot"></span>'+(task?'三级页面 · 任务操作':'二级页面 · 功能中心')+'</span><h1 id="pagetitle" tabindex="-1">'+title+'</h1><p>'+desc+'</p></div>'+glyph(task?item.tasks[task][2]:item.icon,item.tone)+'</section>';
+}
+function aside(key,task){
+ const item=modules[key];
+ return '<aside class="panel" aria-labelledby="tip-title"><div class="asidehead">'+icon('info')+'<h2 id="tip-title">体验提示</h2></div><p>'+item.tip+'</p>'+(task?'<div class="notice">首页 → '+item.title+' → '+item.tasks[task][0]+'</div>':'<div class="notice">点击工具进入三级操作页。</div>')+'</aside>';
+}
+function modulePage(key){
+ const item=modules[key];
+ return pageHeader(key)+'<div class="pagegrid"><section class="panel" aria-labelledby="tools-title"><h2 id="tools-title">选择工具</h2><div class="stack">'+Object.entries(item.tasks).map(([task,data])=>'<a class="rowlink" href="#/'+key+'/'+task+'">'+glyph(data[2],item.tone)+'<span><h3>'+data[0]+'</h3><p>'+data[1]+'</p></span><span class="arrow">'+icon('arrow')+'</span></a>').join('')+'</div></section>'+aside(key)+'</div>';
+}
+const status='<div class="status" id="status" role="status"></div>';
+const output='<div class="output" id="result" role="region" aria-label="操作结果" tabindex="0" hidden></div>';
+const displaySample='<div class="notice"><strong>样例来源：</strong>回声社区服务中心公告（内置样例）</div>';
+const map='<div class="fauxmap" aria-label="演示路线：社区东门、无障碍通道、目的地"><span>社区东门</span><i class="mapline" aria-hidden="true"></i><span>无障碍通道</span><i class="mapline" aria-hidden="true"></i><span>目的地</span></div>';
+function taskMarkup(task){
+ switch(task){
+  case 'ocr':return '<h2>识别面板</h2><p>使用内置公告，体验从图像取字到语音播报。</p>'+displaySample+'<div class="actions">'+button('recognize','识别示例文字','primary','scan')+button('read-voice','朗读结果','','play')+button('stop-voice','停止朗读')+'</div>'+output+status;
+  case 'speak':return '<h2>文字与语音</h2>'+formLabel('朗读内容','<textarea id="speak-text" rows="3" maxlength="1000">你好，欢迎使用回声无障碍数字生活助手。</textarea>')+formLabel('语速：<output id="rate-label" for="rate">1.0 倍</output>','<input id="rate" type="range" min="0.6" max="1.6" step="0.1" value="1">')+'<div class="actions">'+button('read-voice','开始朗读','primary','play')+button('stop-voice','停止朗读')+'</div>'+status;
+  case 'talk':case 'meeting':return '<h2>字幕窗口</h2><p>演示音源 · 不启用麦克风</p><div id="caption-box" class="output captionbox" role="log" aria-label="字幕" aria-live="polite" aria-relevant="additions">点击“开始示例”，查看逐条出现的字幕。</div><div class="actions">'+button('caption-start','开始示例','primary','play')+button('caption-stop','暂停')+button('caption-clear','清空')+'</div>'+status;
+  case 'plan':return '<h2>路线偏好</h2>'+formLabel('选择目的地','<select id="destination">'+options(routePlaces)+'</select>')+'<fieldset><legend>优先经过的设施</legend><label class="check"><input id="ramp" type="checkbox" value="坡道" checked>坡道</label><label class="check"><input id="lift" type="checkbox" value="电梯">电梯</label><label class="check"><input id="tactile" type="checkbox" value="盲道">盲道</label></fieldset><div class="actions">'+button('route-plan','生成示例路线','primary','route')+'<span id="guide-link" hidden>'+link('travel/guide','查看分段导航','','arrow')+'</span></div>'+output+status;
+  case 'guide':return '<h2>示例路线</h2><p id="guide-destination"></p>'+map+'<ol class="route-list" id="route-list" aria-label="路线步骤">'+routeSteps.map((step,index)=>'<li>'+String(index+1).padStart(2,'0')+' · '+step+'</li>').join('')+'</ol><div class="actions">'+button('route-back','上一步')+button('route-next','下一步','primary','arrow')+button('route-speak','朗读本段','','play')+'</div>'+status;
+  case 'sos':return '<h2>确认求助信息</h2><p class="dangertext">这是一项演示，不会发送任何消息。</p><div class="notice" id="sos-summary"></div>'+formLabel('求助信息','<textarea id="sos-text" rows="3" maxlength="200">我需要协助，请在方便时与我联系。</textarea>')+'<div class="actions">'+button('sos-preview','核对求助内容','danger','shield')+'<span id="sos-confirm-wrap" hidden>'+button('sos-confirm','确认模拟发送','danger')+'</span>'+link('help/contact','调整联系人')+'</div>'+output+status;
+  case 'contact':return '<h2>联系偏好</h2>'+formLabel('联系人称呼（仅演示，请勿输入号码）','<input id="contact-name" maxlength="24">')+'<label class="check"><input id="silent" type="checkbox">静默求助（演示不播放提示音）</label><div class="actions">'+button('contact-save','保存演示设置','primary')+link('help/sos','返回求助流程')+'</div>'+status;
+  case 'doctor':return '<h2>模拟挂号</h2>'+formLabel('选择科室','<select id="service-first">'+options(['全科门诊','眼科门诊','耳鼻喉科'])+'</select>')+formLabel('选择时段','<select id="service-second">'+options(['示例日期 · 上午 09:30','示例日期 · 下午 14:00'])+'</select>')+'<div class="actions">'+button('service-run','生成模拟预约','primary')+'</div>'+output+status;
+  case 'cab':return '<h2>模拟叫车</h2>'+formLabel('选择目的地','<select id="service-first">'+options(routePlaces)+'</select>')+formLabel('乘车需求','<select id="service-second">'+options(['需要协助上下车','携带折叠轮椅','无特殊需求'])+'</select>')+'<div class="actions">'+button('service-run','预览模拟订单','primary')+'</div>'+output+status;
+  case 'office':return '<h2>示例办事清单</h2>'+formLabel('选择事项','<select id="service-first">'+options(['无障碍设施咨询','适老化改造咨询'])+'</select>')+'<div class="actions">'+button('service-run','查看示例说明','primary')+'</div>'+output+status;
+  case 'shop':return '<h2>演示购物清单</h2>'+formLabel('选择用品','<select id="service-first">'+options(['大字时钟','高对比度键盘贴','防滑浴室垫'])+'</select>')+'<div class="actions">'+button('service-run','加入演示清单','primary')+'</div>'+output+status;
+  case 'review':return '<h2>设施体验反馈</h2><div class="notice"><strong>社区图书馆（样例）</strong><br>东侧入口设有坡道，前台位于入口左侧。</div>'+formLabel('设施状态','<select id="service-first">'+options(['使用顺畅','需要改善','暂不可用'])+'</select>')+formLabel('补充说明（可选）','<textarea id="service-second" maxlength="200" rows="2" placeholder="请勿填写个人信息"></textarea>')+'<div class="actions">'+button('service-run','记录演示反馈','primary')+'</div>'+output+status;
+  case 'volunteer':return '<h2>选择协助需求</h2>'+formLabel('协助类型','<select id="service-first">'+options(['出行陪同','窗口办事协助','数字工具使用协助'])+'</select>')+'<div class="actions">'+button('service-run','生成模拟申请','primary')+'</div>'+output+status;
+  case 'mode':return '<h2>选择预设</h2><p>也可以在顶部单独切换大字与高对比。</p>'+formLabel('体验模式','<select id="mode-select">'+options(['默认模式','视障模式','听障模式','老年模式'])+'</select>')+'<div class="actions">'+button('mode-apply','应用模式','primary','sliders')+'</div>'+status;
+ }
+ return '';
+}
+function clearCaption(){if(timer!==null){clearInterval(timer);timer=null;}}
+function speakText(value,rate=1){
+ if(!value.trim()){setText('status','请先准备要朗读的文字。');return;}
+ if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){setText('status','当前浏览器不支持语音播放，可使用设备的读屏功能。');return;}
+ speechSynthesis.cancel();
+ const speech=new SpeechSynthesisUtterance(value);
+ speech.lang='zh-CN';speech.rate=rate;
+ const voice=speechSynthesis.getVoices().find(item=>item.lang.toLowerCase().startsWith('zh'));
+ if(voice) speech.voice=voice;
+ speech.onstart=()=>{if(find('status')) setText('status','正在朗读。');};
+ speech.onend=()=>{if(find('status')) setText('status','朗读结束。');};
+ speech.onerror=event=>{if(!['canceled','interrupted'].includes(event.error)&&find('status')) setText('status','语音不可用，请确认设备安装了语音包，或使用系统读屏。');};
+ speechSynthesis.speak(speech);
+}
+function setupTask(task){
+ const msg=value=>setText('status',value);
+ const result=value=>{setText('result',value);find('result').hidden=!value;};
+ const act=(id,callback)=>{find(id).onclick=callback;};
+ if(task==='ocr'||task==='speak'){
+  if(task==='ocr'){
+   find('read-voice').disabled=true;
+   act('recognize',()=>{result(readSample);find('read-voice').disabled=false;msg('已显示识别结果，可选择朗读。');});
+  }else find('rate').oninput=()=>setText('rate-label',Number(find('rate').value).toFixed(1)+' 倍');
+  act('read-voice',()=>task==='ocr'?speakText(readSample):speakText(find('speak-text').value,Number(find('rate').value)));
+  act('stop-voice',()=>{window.speechSynthesis?.cancel();msg('已停止朗读。');});
+ }
+ if(task==='talk'||task==='meeting'){
+  captionIndex=0;captionLines=[];
+  const box=find('caption-box');
+  const start=find('caption-start');const stop=find('caption-stop');stop.disabled=true;
+  const reset=()=>{clearCaption();captionIndex=0;captionLines=[];box.textContent='点击“开始示例”，查看逐条出现的字幕。';start.textContent='开始示例';start.disabled=false;stop.disabled=true;};
+  const nextLine=()=>{
+   if(!captionLines.length) box.replaceChildren();
+   const line=document.createElement('div');line.textContent=scripts[task][captionIndex++];
+   captionLines.push(line.textContent);box.append(line);
+   if(captionIndex>=scripts[task].length){clearCaption();start.disabled=false;start.textContent='重新播放';stop.disabled=true;msg('示例结束，共 '+captionIndex+' 条字幕。');}
+  };
+  act('caption-start',()=>{if(captionIndex>=scripts[task].length) reset();start.disabled=true;stop.disabled=false;msg('正在播放示例字幕。');nextLine();if(captionIndex<scripts[task].length) timer=setInterval(nextLine,2000);});
+  act('caption-stop',()=>{clearCaption();start.disabled=false;start.textContent='继续播放';stop.disabled=true;msg('示例已暂停。');});
+  act('caption-clear',()=>{reset();msg('字幕已清空。');});
+ }
+ if(task==='plan'){
+  find('destination').value=state.route;
+  for(const id of ['ramp','lift','tactile']) find(id).checked=state.preferences.includes(find(id).value);
+  act('route-plan',()=>{
+   state.route=find('destination').value;
+   state.preferences=['ramp','lift','tactile'].map(find).filter(input=>input.checked).map(input=>input.value);
+   result('社区东门 → '+state.route+'\n设施偏好：'+(state.preferences.join('、')||'未指定')+'\n演示路线约 650 米，仅用于展示。');
+   find('guide-link').hidden=false;msg('已生成示例路线。');
+  });
+ }
+ if(task==='guide'){
+  setText('guide-destination','目的地：'+state.route);routeIndex=0;
+  const draw=()=>{Array.from(find('route-list').children).forEach((item,index)=>{if(index===routeIndex)item.setAttribute('aria-current','step');else item.removeAttribute('aria-current');});find('route-back').disabled=routeIndex===0;find('route-next').disabled=routeIndex===routeSteps.length-1;};
+  const update=()=>{draw();msg('第 '+(routeIndex+1)+' 步：'+routeSteps[routeIndex]);};
+  draw();act('route-back',()=>{routeIndex--;update();});act('route-next',()=>{routeIndex++;update();});act('route-speak',()=>speakText(routeSteps[routeIndex]));
+ }
+ if(task==='sos'){
+  setText('sos-summary','收件人：'+state.contact+'｜位置：社区东门（模拟）｜'+(state.silent?'静默求助':'普通求助'));
+  find('sos-text').oninput=()=>{find('sos-confirm-wrap').hidden=true;result('');msg('');};
+  act('sos-preview',()=>{const message=find('sos-text').value.trim();if(!message){msg('请填写求助内容。');return;}result('待确认：'+message+'\n位置信息为模拟数据。');find('sos-confirm-wrap').hidden=false;msg('请确认是否模拟发送。');});
+  act('sos-confirm',()=>{find('sos-confirm-wrap').hidden=true;msg('模拟发送完成。没有联系任何人。');find('sos-preview').focus();});
+ }
+ if(task==='contact'){
+  find('contact-name').value=state.contact;find('silent').checked=state.silent;
+  act('contact-save',()=>{const name=find('contact-name').value.trim();if(!name){msg('请填写联系人称呼。');return;}state.contact=name;state.silent=find('silent').checked;msg('已保存到本次演示会话。');});
+ }
+ if(task==='mode'){
+  find('mode-select').value=state.mode;
+  act('mode-apply',()=>{
+   state.mode=find('mode-select').value;state.big=state.mode==='老年模式'||state.mode==='视障模式';state.contrast=state.mode==='视障模式';applySettings();saveSettings();
+   msg('已应用'+state.mode+'。'+(state.mode==='听障模式'?' 可回首页体验实时字幕。':''));
+  });
+ }
+ if(find('service-run')) act('service-run',()=>{
+  const first=find('service-first').value;const second=find('service-second')?.value.trim();
+  const records={doctor:'模拟预约：'+first+'｜'+second+'\n未实际预约。',cab:'模拟订单：前往'+first+'｜'+second+'\n未实际叫车。',office:'事项：'+first+'\n1. 确认咨询主题。\n2. 记录希望解决的问题。\n3. 实际办理要求以当地服务窗口为准。',shop:'演示清单已选择：'+first+' × 1\n未支付或下单。',review:'已记录设施状态：'+first+(second?'\n说明：'+second:'')+'\n未上传。',volunteer:'模拟协助申请：'+first+'\n未联系志愿者。'};
+  result(records[task]);msg('演示结果已显示。');
+ });
+}
+function render(shouldFocus){
+ if(location.hash=== '#main')return;
+ const parts=location.hash.replace(/^#\/?/,'').split('/').filter(Boolean);
+ const key=Object.hasOwn(modules,parts[0])?parts[0]:'';
+ const task=key&&Object.hasOwn(modules[key].tasks,parts[1])?parts[1]:'';
+ const path=key+'/'+task;
+ if(path===currentPath)return;
+ currentPath=path;clearCaption();window.speechSynthesis?.cancel();
+ drawNav(key,task);
+ const content=task?pageHeader(key,task)+'<div class="pagegrid"><section class="panel" aria-label="任务操作">'+taskMarkup(task)+'</section>'+aside(key,task)+'</div>':key?modulePage(key):homepage();
+ find('main').innerHTML=content+footer;
+ document.title=(task?modules[key].tasks[task][0]:key?modules[key].title:'无障碍数字生活助手')+' · 回声 Echo';
+ if(task) setupTask(task);
+ if(shouldFocus){find('pagetitle').focus({preventScroll:true});window.scrollTo(0,0);}
+}
+window.addEventListener('hashchange',()=>render(true));
+applySettings();render(false);
+</script>
+</body>
+</html>
